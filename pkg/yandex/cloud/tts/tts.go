@@ -37,14 +37,14 @@ var (
 	voices = map[string]string{
 		"ru-RU": "filipp",
 		"en-EU": "john",
-		"kk-KK": "saule",
+		"kk-KK": "madi",
 		"de-DE": "lea",
 		"he-IL": "naomi",
 	}
 	languages = map[string]Language{
 		"ru": LangRu,
 		"en": LangEu,
-		"kz": LangKz,
+		"kk": LangKz,
 		"de": LangDe,
 		// "he": LangHe,
 		"uz": LangUz,

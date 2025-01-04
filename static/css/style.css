@@ -1,0 +1,130 @@
+.btn {
+    border-radius: 0 !important;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #212529;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    padding: 0 15px;
+    height: 50px;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column-reverse;
+    position: fixed;
+    bottom: 0;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 50px 14px 75px 12px;
+    overflow: auto;
+}
+
+.chat .message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chat .message.right {
+    align-items: flex-end;
+    margin: 10px 0;
+}
+
+.chat .message .msg_controler {
+    display: flex;
+    flex-direction: row;
+}
+
+.chat .message.right .msg_controler {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.chat .message .recognized_message {
+    border: 1px solid transparent;
+    background-color: gray;
+    padding: 5px;
+    min-width: 200px;
+    margin-bottom: 1px;
+}
+
+.chat .message.right .recognized_message {
+    text-align: right;
+    border: 1px solid transparent;
+    background-color: gray;
+    padding: 5px;
+    min-width: 200px;
+    margin-bottom: 1px;
+}
+
+.chat .message .translated_message {
+    border: 1px solid transparent;
+    background-color: gray;
+    padding: 5px;
+    min-width: 200px;
+    margin-bottom: 1px;
+}
+
+.chat .message.right .translated_message {
+    text-align: right;
+    border: 1px solid transparent;
+    background-color: gray;
+    padding: 5px;
+    min-width: 200px;
+    margin-bottom: 1px;
+}
+
+.chat .message .error {
+    color: var(--bs-danger)
+}
+
+.controler {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    background: #212529;
+}
+
+.controler .controler__error {
+    color: var(--bs-danger)
+}
+
+.controler .controler__btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.controler .btngroup {
+    padding: 0;
+    width: 50%;
+}
+
+.controler .btngroup .record {
+    width: calc(100% - 65px);
+    min-width: 60px;
+}
+
+.controler .btngroup .language {
+    width: 60px;
+}
+
+.hide {
+    display: none !important;
+}

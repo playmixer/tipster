@@ -9,6 +9,8 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/playmixer/tipster/internal/adapters/cache"
 	"github.com/playmixer/tipster/internal/adapters/recognizer"
+	"github.com/playmixer/tipster/internal/adapters/recognizer/multi"
+	"github.com/playmixer/tipster/internal/adapters/recognizer/vosk"
 	yndxRecognize "github.com/playmixer/tipster/internal/adapters/recognizer/yandex"
 	"github.com/playmixer/tipster/internal/adapters/translator"
 	yndxTranslator "github.com/playmixer/tipster/internal/adapters/translator/yandex"
@@ -32,6 +34,11 @@ func Init() (*Config, error) {
 	cfg := &Config{
 		Recognizer: recognizer.Config{
 			Yandex: yndxRecognize.Config{},
+			Vosk:   vosk.Config{},
+			Multi: multi.Config{
+				Yandex: yndxRecognize.Config{},
+				Vosk:   vosk.Config{},
+			},
 		},
 		Translator: translator.Config{
 			Yandex: yndxTranslator.Config{},

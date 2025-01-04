@@ -3,6 +3,7 @@ package cache
 import (
 	"context"
 
+	"github.com/playmixer/tipster/internal/adapters/cache/fake"
 	"github.com/playmixer/tipster/internal/adapters/cache/memory"
 	"github.com/playmixer/tipster/internal/adapters/cache/redisstore"
 	"go.uber.org/zap"
@@ -20,8 +21,14 @@ type Cache interface {
 func New(ctx context.Context, name string, cfg Config, log *zap.Logger) Cache {
 	if name == "redis" {
 		m := redisstore.New(cfg.Redis, log)
+		log.Info("Initialize redis cache storage")
 		return m
 	}
+	if name == "fake" {
+		log.Info("Initialize fake cache storage")
+		return fake.New()
+	}
+	log.Info("Initialize memory cache storage")
 	m := memory.New(ctx)
 
 	return m

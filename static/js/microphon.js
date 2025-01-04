@@ -67,7 +67,7 @@ function startRecord(e, name, event) {
             clearTimeout(timerID)
             timerID = null
         }
-        console.log(e)
+        console.log(name, event, isStart)
     }
 }
 

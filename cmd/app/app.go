@@ -40,7 +40,7 @@ func run() error {
 		return fmt.Errorf("failed initialize logger: %w", err)
 	}
 
-	rcgz, err := recognizer.New(cfg.RecognizerName, cfg.Recognizer)
+	rcgz, err := recognizer.New(cfg.RecognizerName, cfg.Recognizer, lgr)
 	if err != nil {
 		return fmt.Errorf("failed initialize recognize: %w", err)
 	}

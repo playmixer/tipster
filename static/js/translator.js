@@ -28,15 +28,15 @@ const btnLang2 = document.querySelector("#btnGroupDropLanguage2")
 
 const record1 = document.querySelector("#record1")
 record1.innerHTML = imgMicrophon
-// record1.addEventListener("click", startRecord(record1, "record1", "click"))
-record1.addEventListener("touchstart", startRecord(record1, "record1", "start"))
-record1.addEventListener("touchend", startRecord(record1, "record1", "end"))
+record1.addEventListener("click", startRecord(record1, "record1", "click"))
+// record1.addEventListener("touchstart", startRecord(record1, "record1", "start"))
+// record1.addEventListener("touchend", startRecord(record1, "record1", "end"))
 
 const record2 = document.querySelector("#record2")
 record2.innerHTML = imgMicrophon
-// record2.addEventListener("click", startRecord(record2, "record2", "click"))
-record2.addEventListener("touchstart", startRecord(record2, "record2", "start"))
-record2.addEventListener("touchend", startRecord(record2, "record2", "end"))
+record2.addEventListener("click", startRecord(record2, "record2", "click"))
+// record2.addEventListener("touchstart", startRecord(record2, "record2", "start"))
+// record2.addEventListener("touchend", startRecord(record2, "record2", "end"))
 
 const voice_played = document.querySelector("#voice_played")
 const loader = document.querySelector("#loader")
@@ -178,11 +178,13 @@ function getInfo() {
         console.log(data)
         if (data.status == 200) {
             data.json().then(body => {
-                if (body.languages) {
-                    renderLanguage(body.languages)
-                }
-                if (body.recognize?.maximumLength && body.recognize?.maximumLength > 0) {
-                    longTimeVoiceMessage = body.recognize.maximumLength * 1000
+                if (body.recognize) {
+                    if (body.recognize?.languages) {
+                        renderLanguage(body.recognize?.languages)
+                    }
+                    if (body.recognize?.maximumLength && body.recognize?.maximumLength > 0) {
+                        longTimeVoiceMessage = body.recognize.maximumLength * 1000
+                    }
                 }
             })
 

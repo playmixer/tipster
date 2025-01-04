@@ -300,28 +300,43 @@ async function addAudio(src, name) {
 function renderLanguage(languages) {
     for (const l of Object.keys(languages)) {
         const langName = l.split(" ")[0]
-        a = document.createElement("a")
-        a.classList.add("dropdown-item")
-        a.href = "#"
-        a.innerText = l
-        a.addEventListener("click", function() {
+        li = document.createElement("li")
+        const a1 = document.createElement("a")
+        a1.classList.add("dropdown-item")
+        a1.href = "#"
+        a1.innerText = l
+        a1.addEventListener("click", function() {
             lang1value = languages[l]
             btnLang1.innerText = langName
+            for (li of lang1.querySelectorAll("li")) {
+                li.querySelector("a").classList.remove("active")
+            }
+            a1.classList.add("active")
         })
-        li = document.createElement("li")
-        li.appendChild(a)
+        if (lang1value == languages[l]) {
+            a1.classList.add("active")
+        }
+        li.appendChild(a1)
         lang1.append(li)
 
-        a = document.createElement("a")
-        a.classList.add("dropdown-item")
-        a.href = "#"
-        a.innerText = l
-        a.addEventListener("click", function() {
+
+        const a2 = document.createElement("a")
+        a2.classList.add("dropdown-item")
+        a2.href = "#"
+        a2.innerText = l
+        a2.addEventListener("click", function() {
             lang2value = languages[l]
             btnLang2.innerText = langName
+            for (li of lang2.querySelectorAll("li")) {
+                li.querySelector("a").classList.remove("active")
+            }
+            a2.classList.add("active")
         })
+        if (lang2value == languages[l]) {
+            a2.classList.add("active")
+        }
         li = document.createElement("li")
-        li.appendChild(a)
+        li.appendChild(a2)
         lang2.append(li)
     }
 }

@@ -130,27 +130,27 @@ func (s *Server) handlerTextSpeech(c *gin.Context) {
 func (s *Server) handlerInfo(c *gin.Context) {
 
 	languages := map[string]string{
-		"RU (русский)":                   "ru-RU",
-		"US (английский)":                "en-US",
-		"DE (немецкий)":                  "de-DE",
-		"ES (испанский)":                 "es-ES",
-		"FI (финский)":                   "fi-FI",
-		"FR (французский)":               "fr-FR",
-		"HE (иврит)":                     "he-HE",
-		"IT (итальянский)":               "it-IT",
-		"KZ (казахский)":                 "kk-KZ",
-		"NL (голландский)":               "nl-NL",
-		"PL (польский)":                  "pl-PL",
-		"PT (португальский)":             "pt-PT",
-		"BR (бразильский португальский)": "pt-BR",
-		"SE (шведский)":                  "sv-SE",
-		"TR (турецкий)":                  "tr-TR",
-		"UZ (узбекский)":                 "uz-UZ",
+		"RU (русский)":    "ru-RU",
+		"EN (английский)": "en-US",
+		"DE (немецкий)":   "de-DE",
+		// "ES (испанский)":                 "es-ES",
+		// "FI (финский)":                   "fi-FI",
+		// "FR (французский)":               "fr-FR",
+		// "HE (иврит)":                     "he-HE",
+		// "IT (итальянский)":               "it-IT",
+		"KZ (казахский)": "kk-KZ",
+		// "NL (голландский)":               "nl-NL",
+		// "PL (польский)":                  "pl-PL",
+		// "PT (португальский)":             "pt-PT",
+		// "BR (бразильский португальский)": "pt-BR",
+		// "SE (шведский)":                  "sv-SE",
+		// "TR (турецкий)":                  "tr-TR",
+		"UZ (узбекский)": "uz-UZ",
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"languages": languages,
 		"recognize": map[string]any{
+			"languages":     languages,
 			"maximumLength": 10,
 		},
 	})

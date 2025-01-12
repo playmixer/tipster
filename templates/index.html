@@ -8,11 +8,12 @@
     <title>Tipster</title>
 </head>
 <body class="bg-dark text-light">
-    <div class="header">
-        info
+    <div class="header d-flex flex-row justify-content-between" id="header">
+        <span>{{ .Email }}</span>
+        <a class="link-light" href="/logout">logout</a>
     </div>
     <div id="chat" class="chat"></div>
-    <div class="controler">
+    <div class="controler" id="controler">
         <div class="controler__error" id="controler__error"></div>
         <div class="controler__btns">
             <div class="btngroup">

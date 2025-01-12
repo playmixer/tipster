@@ -20,7 +20,30 @@ let timerID = null
 let lang1value = "ru-RU"
 let lang2value = "en-US"
 
+const header = document.querySelector("#header")
+const controler = document.querySelector("#controler")
 const chat = document.querySelector("#chat")
+
+function resize() {
+    let timeID = null
+    return function() {
+        if (timerID) clearTimeout(timeID)
+        timerID = setTimeout(function() {
+            chat.style.width = '100%'
+            w = chat.getBoundingClientRect().width
+            paddingHorizontal = 10
+            maxWidth = 800
+            if (w > maxWidth) {
+                paddingHorizontal = Math.min(Number((w - maxWidth) / 2), 400)
+            }
+            chat.style.padding = `50px ${paddingHorizontal}px 75px ${paddingHorizontal}px`
+            controler.style.padding = `10px ${paddingHorizontal}px 10px ${paddingHorizontal}px`
+            header.style.padding = `0 ${paddingHorizontal}px`
+        }, 100)
+    }
+}
+window.addEventListener("resize", resize())
+
 const lang1 = document.querySelector("#lang1")
 const btnLang1 = document.querySelector("#btnGroupDropLanguage1")
 const lang2 = document.querySelector("#lang2")
@@ -73,16 +96,17 @@ function timeoutStopRecord(e, name) {
     }
 }
 
-function recognizing(text, src, name, next) {
+function recognizing(text, src, name, id, error, next) {
     return async function() {
         console.log(text, src, name)
         let content = await getBlobContent(src)
         let formData = new FormData()
         formData.append("data", content)
         formData.append("language", name == "record2" ? lang2value : lang1value)
+        formData.append("frontendID", id)
         fetch(API+"/audio/recognize", {
             method: "POST",
-            body: formData
+            body: formData,
         })
         .then(async data => {
             console.log(data)
@@ -95,12 +119,18 @@ function recognizing(text, src, name, next) {
                 }
                 return
             }
+            error.innerText = "something went wrong, try again later"
+            if (data.status == 400) {
+                data.json().then(j => {
+                    error.innerText = j.error
+                })
+            }
         })
         // text.innerText = "speech to text "+src
     }
 }
 
-function translating(msg, text, name, error, next) {
+function translating(msg, text, name, id, error, next) {
     return async function() {
         if (text.innerText == "") {
             error.innerText = "message is empty"
@@ -111,7 +141,8 @@ function translating(msg, text, name, error, next) {
             body: JSON.stringify({
                 sourceLang:  name == "record2" ? lang2value : lang1value,
                 targetLang: name == "record2" ? lang1value : lang2value,
-                text: text.innerText
+                text: text.innerText,
+                frontendID: `${id}`,
             })
         })
         .then(async data => {
@@ -132,7 +163,7 @@ function translating(msg, text, name, error, next) {
     }
 }
 
-function speech(audio, btn, text, name, error, next) {
+function speech(audio, btn, text, name, id, error, next) {
     return async function() {
         error.innerText = ""
         if (text.innerText == "") {
@@ -143,7 +174,8 @@ function speech(audio, btn, text, name, error, next) {
             method: "POST",
             body: JSON.stringify({
                 lang: name == "record2" ? lang1value : lang2value,
-                text: text.innerText
+                text: text.innerText,
+                frontendID: `${id}`,
             })
         })
         .then(async data => {
@@ -171,6 +203,7 @@ function speech(audio, btn, text, name, error, next) {
 }
 
 function getInfo() {
+    resize()()
     fetch(API+"/info", {
         method: "GET",
     })
@@ -215,6 +248,7 @@ function audioPlay(audio, btn) {
 }
 
 async function addAudio(src, name) {
+    const id = +(new Date())
     let audio = document.createElement("audio")
     audio.src = src
 
@@ -237,9 +271,9 @@ async function addAudio(src, name) {
 
     playTranslated.addEventListener("click", eventPlaySpeech)
 
-    const eventGetSpeech = speech(audioTranslated, playTranslated, translatedMsg, name, error, eventPlaySpeech)
-    const eventGetTranslate = translating(translatedMsg, recognizedMsg, name, error, eventGetSpeech)
-    const eventGetRecognize = recognizing(recognizedMsg, src, name, eventGetTranslate)
+    const eventGetSpeech = speech(audioTranslated, playTranslated, translatedMsg, name, id, error, eventPlaySpeech)
+    const eventGetTranslate = translating(translatedMsg, recognizedMsg, name, id, error, eventGetSpeech)
+    const eventGetRecognize = recognizing(recognizedMsg, src, name, id, error, eventGetTranslate)
 
     let play = document.createElement("button")
     play.innerHTML = imgPlay
@@ -282,9 +316,9 @@ async function addAudio(src, name) {
 
     let title = document.createElement("span")
     if (name != "record2")
-        title.innerText = +(new Date())+" "+lang1value+" - "+lang2value
+        title.innerText = id+" "+lang1value+" - "+lang2value
     else
-        title.innerText = lang2value+" - "+lang1value+" "+ +(new Date())
+        title.innerText = lang2value+" - "+lang1value+" "+id
 
     let message = document.createElement("div")
     message.classList.add("message")

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Authorization</title>
+</head>
+<body class="bg-dark text-light">
+    <div class="d-flex flex-row align-items-center vh-100 justify-content-center ">
+        <div id="send_email" class="d-flex flex-column align-items-end border-end border-start border-top border-bottom border-primary-subtle p-3" style="width: 400px;">
+            <div class="w-100 d-flex flex-column align-items-center">
+                <h4>Authorization</h4>
+            </div>
+            <div class="mb-3 w-100">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="email">
+            </div>
+            <div class="mb-3 w-100" style="display: none;" id="form_password">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password">
+            </div>
+            <div class="mb-3">
+                <span class="text-bg-info" id="form_message">Please provide the email address to which we will send the password.</span>
+            </div>
+            <div class="mb-3 text-danger" id="form_error"></div>
+            <div class="mb-3 w-100 d-flex flex-row justify-content-between">
+                <a href="#" class="link-light" style="display: none;" id="form_another_email">
+                    another email
+                </a>
+                <button class="btn btn-primary d-flex flex-row align-items-center" id="submit">
+                    <div class="spinner-border" role="status" style="height: 16px; width: 16px; display: none;" id="loader">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    submit
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/static/js/authorization.js"></script>
+</body>
+</html>

@@ -14,7 +14,9 @@ import (
 	"github.com/playmixer/tipster/internal/adapters/api/rest"
 	"github.com/playmixer/tipster/internal/adapters/cache"
 	"github.com/playmixer/tipster/internal/adapters/logger"
+	"github.com/playmixer/tipster/internal/adapters/notification"
 	"github.com/playmixer/tipster/internal/adapters/recognizer"
+	"github.com/playmixer/tipster/internal/adapters/storage"
 	"github.com/playmixer/tipster/internal/adapters/translator/yandex"
 	"github.com/playmixer/tipster/internal/adapters/tts"
 	"github.com/playmixer/tipster/internal/core/config"
@@ -54,7 +56,17 @@ func run() error {
 		return fmt.Errorf("failed initialize tts: %w", err)
 	}
 
-	service, err := tipster.New(rcgz, trns, speech, cch, tipster.SetLogger(lgr))
+	notify, err := notification.New(cfg.Notify)
+	if err != nil {
+		return fmt.Errorf("failed initialize notify: %w", err)
+	}
+
+	store, err := storage.New(cfg.Store, lgr)
+	if err != nil {
+		return fmt.Errorf("failed initialize storage: %w", err)
+	}
+
+	service, err := tipster.New(cfg.Tipster, store, notify, rcgz, trns, speech, cch, tipster.SetLogger(lgr))
 	if err != nil {
 		return fmt.Errorf("failed initialize tipster: %w", err)
 	}

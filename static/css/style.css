@@ -1,4 +1,28 @@
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 .btn {
+    border-radius: 0 !important;
+}
+
+.form-control {
     border-radius: 0 !important;
 }
 
@@ -25,7 +49,7 @@
     height: 100vh;
     width: 100%;
     margin: 0;
-    padding: 50px 14px 75px 12px;
+    padding: 50px 11px 75px 10px;
     overflow: auto;
 }
 
@@ -54,35 +78,35 @@
 
 .chat .message .recognized_message {
     border: 1px solid transparent;
-    background-color: gray;
     padding: 5px;
-    min-width: 200px;
+    background-color: rgba(200, 200, 200, 0.1);
+    width: 100%;
     margin-bottom: 1px;
 }
 
 .chat .message.right .recognized_message {
     text-align: right;
     border: 1px solid transparent;
-    background-color: gray;
     padding: 5px;
-    min-width: 200px;
+    background-color: rgba(200, 200, 200, 0.1);
+    width: 100%;
     margin-bottom: 1px;
 }
 
 .chat .message .translated_message {
     border: 1px solid transparent;
-    background-color: gray;
+    background-color: rgba(200, 200, 200, 0.1);
+    width: 100%;
     padding: 5px;
-    min-width: 200px;
     margin-bottom: 1px;
 }
 
 .chat .message.right .translated_message {
     text-align: right;
     border: 1px solid transparent;
-    background-color: gray;
+    background-color: rgba(200, 200, 200, 0.1);
+    width: 100%;
     padding: 5px;
-    min-width: 200px;
     margin-bottom: 1px;
 }
 

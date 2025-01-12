@@ -39,14 +39,23 @@ var (
 		"en-EU": "john",
 		"kk-KK": "madi",
 		"de-DE": "lea",
-		"he-IL": "naomi",
+		// "he-IL": "naomi",
+		"uz-UZ": "nigora",
 	}
 	languages = map[string]Language{
 		"ru": LangRu,
+
 		"en": LangEu,
+		"eu": LangEu,
+		"us": LangEu,
+
 		"kk": LangKz,
+		"kz": LangKz,
+
 		"de": LangDe,
+
 		// "he": LangHe,
+
 		"uz": LangUz,
 	}
 )

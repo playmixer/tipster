@@ -29,6 +29,10 @@ type tipster interface {
 	Recognize(ctx context.Context, userID uint, fID string, data []byte, language string) (string, error)
 	Translate(ctx context.Context, userID uint, fID string, sourceLanguage, targetLanguage string, text string) (string, error)
 	Speech(ctx context.Context, userID uint, fID string, text, lang string) ([]byte, error)
+
+	GetLanguages(ctx context.Context) map[string]string
+	GetRecognizeLanguages(ctx context.Context) []string
+	GetSpeechLanguages(ctx context.Context) []string
 }
 
 type Server struct {

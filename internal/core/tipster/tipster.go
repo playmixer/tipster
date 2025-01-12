@@ -185,6 +185,10 @@ func (t *Tipster) Recognize(ctx context.Context, userID uint, fID string, data [
 		return "", apperrors.ErrShortRecord
 	}
 
+	if meta.Duration > time.Second*10 {
+		return "", apperrors.ErrLongRecord
+	}
+
 	key := fmt.Sprintf("%s_%s", hashBtoS(data), language)
 	_text := t.cache.Get(ctx, key)
 	if _text != nil {
@@ -259,4 +263,56 @@ func (t *Tipster) Speech(ctx context.Context, userID uint, fID string, text, lan
 	t.cache.Set(ctx, key, string(res), 0)
 
 	return res, nil
+}
+
+func (t *Tipster) GetLanguages(ctx context.Context) map[string]string {
+	return map[string]string{
+		"RU (русский)":                   "ru-RU",
+		"EN (английский)":                "en-US",
+		"DE (немецкий)":                  "de-DE",
+		"ES (испанский)":                 "es-ES",
+		"FI (финский)":                   "fi-FI",
+		"FR (французский)":               "fr-FR",
+		"HE (иврит)":                     "he-HE",
+		"IT (итальянский)":               "it-IT",
+		"KZ (казахский)":                 "kk-KZ",
+		"NL (голландский)":               "nl-NL",
+		"PL (польский)":                  "pl-PL",
+		"PT (португальский)":             "pt-PT",
+		"BR (бразильский португальский)": "pt-BR",
+		"SE (шведский)":                  "sv-SE",
+		"TR (турецкий)":                  "tr-TR",
+		"UZ (узбекский)":                 "uz-UZ",
+	}
+}
+
+func (t *Tipster) GetRecognizeLanguages(ctx context.Context) []string {
+	return []string{
+		"ru-RU",
+		"en-US",
+		"de-DE",
+		"es-ES",
+		"fi-FI",
+		"fr-FR",
+		"he-HE",
+		"it-IT",
+		"kk-KZ",
+		"nl-NL",
+		"pl-PL",
+		"pt-PT",
+		"pt-BR",
+		"sv-SE",
+		"tr-TR",
+		"uz-UZ",
+	}
+}
+
+func (t *Tipster) GetSpeechLanguages(ctx context.Context) []string {
+	return []string{
+		"ru-RU",
+		"en-US",
+		"de-DE",
+		"kk-KZ",
+		"uz-UZ",
+	}
 }

@@ -220,30 +220,14 @@ func (s *Server) handlerTextSpeech(c *gin.Context) {
 }
 
 func (s *Server) handlerInfo(c *gin.Context) {
-
-	languages := map[string]string{
-		"RU (русский)":    "ru-RU",
-		"EN (английский)": "en-US",
-		"DE (немецкий)":   "de-DE",
-		// "ES (испанский)":                 "es-ES",
-		// "FI (финский)":                   "fi-FI",
-		// "FR (французский)":               "fr-FR",
-		// "HE (иврит)":                     "he-HE",
-		// "IT (итальянский)":               "it-IT",
-		"KZ (казахский)": "kk-KZ",
-		// "NL (голландский)":               "nl-NL",
-		// "PL (польский)":                  "pl-PL",
-		// "PT (португальский)":             "pt-PT",
-		// "BR (бразильский португальский)": "pt-BR",
-		// "SE (шведский)":                  "sv-SE",
-		// "TR (турецкий)":                  "tr-TR",
-		"UZ (узбекский)": "uz-UZ",
-	}
-
 	c.JSON(http.StatusOK, gin.H{
+		"languages": s.service.GetLanguages(c.Request.Context()),
 		"recognize": map[string]any{
-			"languages":     languages,
+			"languages":     s.service.GetRecognizeLanguages(c.Request.Context()),
 			"maximumLength": 10,
+		},
+		"speech": map[string]any{
+			"languages": s.service.GetSpeechLanguages(c.Request.Context()),
 		},
 	})
 }

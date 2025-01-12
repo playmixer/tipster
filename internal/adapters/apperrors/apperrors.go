@@ -9,6 +9,7 @@ var (
 	ErrLanguageNotSupportTranslace = errors.New("language not supported for translation")
 
 	ErrShortRecord = errors.New("record is short")
+	ErrLongRecord  = errors.New("record is long")
 
 	//auth
 	ErrPassNotEqual              = errors.New("passwords not equal")
